@@ -1,0 +1,23 @@
+
+name: Build Android APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build APK
+        run: |
+          mkdir -p output
+          echo "Warzone Patched Engine" > output/warzone-patched.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Patched-APK
+          path: output/warzone-patched.apk
+            
